@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ff6600, #cc5500);
+    display: flex;
+    flex-direction: column; /* Permet au contenu de s'étendre verticalement */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Permet d'éviter que le contenu ne disparaisse si la page est trop courte */
+    padding-top: 80px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+
+}
+
+        .nav-links, .auth-links {
+            display: flex;
+        }
+        .nav-links a, .auth-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+            position: relative;
+        }
+        .nav-links a:last-child, .auth-links a:last-child {
+            margin-right: 0;
+        }
+        .nav-links a::after, .auth-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .auth-links a:hover::after {
+            width: 100%;
+        }
+        .menu-btn {
+            display: none;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #222;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            transition: left 0.3s ease;
+            z-index: 9999;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            text-align: center;
+            display: block;
+            position: relative; /* Évite tout chevauchement d'éléments */
+            z-index: 10000; /* Assure que les liens sont bien cliquables */
+        }
+        .sidebar a:hover {
+            background-color: #444;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .nav-links, .auth-links {
+                display: none;
+            }
+            .menu-btn {
+                display: block;
+            }
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 102, 0, 0.2);
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            animation: bubbleMove 6s infinite linear;
+        }
+        @keyframes bubbleMove {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(20px); }
+            100% { transform: translateY(0); }
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #ff6600;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background-color: #cc5500;
+        }
+        .login-img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+            animation: floating 3s infinite ease-in-out;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Style pour le bouton du menu déroulant */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+
+    color: white;
+    padding: 14px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Le contenu du menu déroulant */
+.dropdown-content {
+    display: none; /* Caché par défaut */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change la couleur quand on survole un lien */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Affiche le menu déroulant quand on survole le bouton (mode desktop) */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Affiche le menu déroulant lorsqu'on clique (mode mobile) */
+@media (max-width: 768px) {
+    .dropdown-content {
+        position: relative;
+        box-shadow: none;
+        background-color: #fff;
+    }
+    .dropdown-content a {
+        padding: 10px 15px;
+    }
+
+    /* Affiche le menu déroulant sur mobile au clic */
+    .dropdown-content {
+        display: none; /* Par défaut, il est caché */
+    }
+}
+
+
+    </style>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h1>Okalamar</h1>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Boisson</a>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="vins.html">Vins</a>
+                <a href="Liqueurs.html">Liqueurs</a>
+                <a href="Canettes.html">Canettes</a>
+                <a href="sans_Alcool.html">Sans-Alcool</a>
+            </div>
+        </div>
+        <a href="galerie.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="auth-links">
+            <a href="connexion.html">Login</a>
+            <a href="inscription.html">Sign In</a>
+        </div>
+        <button class="menu-btn" onclick="openSidebar()">☰</button>
+    </header>
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">×</button>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Boisson</a>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="vins.html">Vins</a>
+                <a href="Liqueurs.html">Liqueurs</a>
+                <a href="Canettes.html">Canettes</a>
+                <a href="sans_Alcool.html">Sans-Alcool</a>
+            </div>
+        </div>
+        <a href="galerie.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+        <a href="connexion.html">Login</a>
+        <a href="inscription.html">Sign In</a>
+    </div>
+    <script>
+function openSidebar() {
+    document.getElementById("sidebar").style.left = "0";
+}
+
+function closeSidebar() {
+    document.getElementById("sidebar").style.left = "-250px";
+}
+
+// Ajoute un détecteur de scroll SEULEMENT si la hauteur de la page dépasse la hauteur de l'écran
+if (document.body.scrollHeight > window.innerHeight) {
+    window.addEventListener("scroll", closeSidebar);
+}
+
+    function toggleDropdown() {
+        const dropdownContent = document.getElementById("dropdown-content");
+        dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+    }
+    </script>
+    <div class="container" data-aos="fade-down">
+        <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="User Icon" class="login-img">
+        <h2 data-aos="fade-right">Connexion</h2>
+        <form>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Mot de passe" required>
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+    <!-- Script pour activer AOS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000, // Durée de l'animation
+        easing: 'ease-in-out', // Effet de transition fluide
+        once: true // Animer une seule fois au défilement
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactez-nous</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+                            background-image: url('banner.jpg');
+    background-size: cover; /* Couvre toute la surface de l'élément */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+
+        }
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .contact-info, .contact-form {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .contact-info div, .contact-form div {
+            flex: 1;
+            margin: 10px;
+        }
+        .contact-info img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .contact-info img:hover {
+            transform: scale(1.05);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #cc5500;
+        }
+        .map-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+            header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        .nav-links, .auth-links {
+            display: flex;
+        }
+        .nav-links a, .auth-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+            position: relative;
+        }
+        .nav-links a:last-child, .auth-links a:last-child {
+            margin-right: 0;
+        }
+        .nav-links a::after, .auth-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .auth-links a:hover::after {
+            width: 100%;
+        }
+        .menu-btn {
+            display: none;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #222;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            transition: left 0.3s ease;
+            z-index: 9999;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            text-align: center;
+            display: block;
+                        position: relative; /* Évite tout chevauchement d'éléments */
+            z-index: 10000; /* Assure que les liens sont bien cliquables */
+        }
+        .sidebar a:hover {
+            background-color: #444;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .nav-links, .auth-links {
+                display: none;
+            }
+            .menu-btn {
+                display: block;
+            }
+        }
+        @media (max-width: 768px) {
+    .contact-form div:last-child img {
+        margin-left: -20px; /* Ajuste cette valeur selon le rendu souhaité */
+        max-width: 150%; /* Assure que l'image ne dépasse pas */
+    }
+}
+
+
+/* Style pour le bouton du menu déroulant */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+
+    color: white;
+    padding: 14px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Le contenu du menu déroulant */
+.dropdown-content {
+    display: none; /* Caché par défaut */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change la couleur quand on survole un lien */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Affiche le menu déroulant quand on survole le bouton (mode desktop) */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Affiche le menu déroulant lorsqu'on clique (mode mobile) */
+@media (max-width: 768px) {
+    .dropdown-content {
+        position: relative;
+        box-shadow: none;
+        background-color: #fff;
+    }
+    .dropdown-content a {
+        padding: 10px 15px;
+    }
+
+    /* Affiche le menu déroulant sur mobile au clic */
+    .dropdown-content {
+        display: none; /* Par défaut, il est caché */
+    }
+}
+
+
+ .footer {
+            text-align: center;
+            background-color: black;
+            color: white;
+            padding: 20px;
+        }
+        .social-icons img {
+            width: 30px;
+            margin: 0 10px;
+        }
+    </style>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Okalamar</h1>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Boisson</a>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="vins.html">Vins</a>
+                <a href="Liqueurs.html">Liqueurs</a>
+                <a href="Canettes.html">Canettes</a>
+                <a href="sans_Alcool.html">Sans-Alcool</a>
+            </div>
+        </div>
+        <a href="galerie.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="auth-links">
+            <a href="connexion.html">Login</a>
+            <a href="inscription.html">Sign In</a>
+        </div>
+        <button class="menu-btn" onclick="openSidebar()">☰</button>
+    </header>
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">×</button>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Grands</a>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="vins.html">Vins</a>
+                <a href="Liqueurs.html">Liqueurs</a>
+                <a href="Canettes.html">Canettes</a>
+                <a href="sans_Alcool.html">Sans-Alcool</a>
+            </div>
+        </div>
+        <a href="galerie.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+        <a href="connexion.html">Login</a>
+        <a href="inscription.html">Sign In</a>
+    </div>
+    <script>
+function openSidebar() {
+    document.getElementById("sidebar").style.left = "0";
+}
+
+function closeSidebar() {
+    document.getElementById("sidebar").style.left = "-250px";
+}
+
+// Ajoute un détecteur de scroll SEULEMENT si la hauteur de la page dépasse la hauteur de l'écran
+if (document.body.scrollHeight > window.innerHeight) {
+    window.addEventListener("scroll", closeSidebar);
+}
+
+    function toggleDropdown() {
+        const dropdownContent = document.getElementById("dropdown-content");
+        dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+    }
+    </script>
+    <div class="container">
+        <h2 data-aos="fade-left">Contactez-nous</h2>
+        <div class="contact-info">
+            <div data-aos="fade-down">
+                <img src="https://assets.stickpng.com/images/580b57fbd9996e24bc43c10d.png" alt="Contact Image">
+            </div>
+            <div data-aos="fade-up">
+                <p><strong>Adresse :</strong> 123 Rue de l'Innovation, Abidjan, Côte d'Ivoire</p>
+                <p><strong>Téléphone :</strong> +225 07 12 34 56 78</p>
+                <p><strong>Email :</strong> contact@exemple.com</p>
+            </div>
+        </div>
+        <div class="contact-form">
+            <div data-aos="fade-left">
+                <form>
+                    <input type="text" placeholder="Votre Nom" required>
+                    <input type="email" placeholder="Votre Email" required>
+                    <textarea rows="5" placeholder="Votre Message" required></textarea>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+            <div data-aos="fade-right">
+                <img src="https://assets.stickpng.com/images/580b57fbd9996e24bc43c10d.png" alt="Envoyez-nous un message">
+            </div>
+        </div>
+        <div class="map-container" data-aos="fade-down">
+            <iframe data-aos="fade-up" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093747!2d144.95565131531844!3d-37.81732797975179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0x5045675218ce6e0!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1604531794821!5m2!1sen!2sau" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+        <footer class="footer">
+        <p >We are social</p>
+        <div class="social-icons">
+            <img src="images/sociale.png" alt="Facebook">
+            <img src="images/instag.png" alt="Instagram">
+            <img src="images/social.png" alt="twitter" >
+        </div>
+    </footer>
+    <!-- Script pour activer AOS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000, // Durée de l'animation
+        easing: 'ease-in-out', // Effet de transition fluide
+        once: true // Animer une seule fois au défilement
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fanta</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+
+}
+
+header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+
+        }
+        .nav-links, .auth-links {
+            display: flex;
+        }
+        .nav-links a, .auth-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+            position: relative;
+        }
+        .nav-links a:last-child, .auth-links a:last-child {
+            margin-right: 0;
+        }
+        .nav-links a::after, .auth-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .auth-links a:hover::after {
+            width: 100%;
+        }
+        .menu-btn {
+            display: none;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #222;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            transition: left 0.3s ease;
+            z-index: 9999;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            text-align: center;
+            display: block;
+                        position: relative; /* Évite tout chevauchement d'éléments */
+            z-index: 10000; /* Assure que les liens sont bien cliquables */
+        }
+        .sidebar a:hover {
+            background-color: #444;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .nav-links, .auth-links {
+                display: none;
+            }
+            .menu-btn {
+                display: block;
+            }
+        }
+
+.banner {
+    text-align: center;
+    padding: 50px 0;
+    position: relative;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-text {
+    font-size: 14rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+        .banner img {
+            height: 350px;
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease, left 0.3s ease, top 0.3s ease;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 50px;
+            background-color: #b22222; /* Rouge brique */
+        }
+        .left, .right {
+            width: 45%;
+        }
+        .image-section img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .three-boxes-section {
+            background-color: #FF8C00;
+            padding: 50px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .box {
+            width: 30%;
+            background-color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .box img {
+            width: 80%;
+        }
+        .buy-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: orange;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+ .iframe-section {
+    position: relative;
+    width: 80%;
+    height: 400px;
+    margin: 50px auto; /* Espacement autour de la div */
+    text-align: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #9e2a2f; /* Rouge brique */
+    transition: opacity 2s ease-in-out; /* Transition lente et fluide */
+    opacity: 1; /* L'overlay est visible au départ */
+}
+
+.iframe-section:hover .overlay {
+    opacity: 0; /* L'overlay devient invisible au survol */
+}
+
+.iframe-section iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+        .text-image-section {
+            display: flex;
+            padding: 50px;
+        }
+        .text-block {
+            width: 70%;
+        }
+        .earth-image {
+            width: 30%;
+            text-align: center;
+        }
+        .earth-image img {
+            width: 100%;
+            animation: spin 10s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .bottom-boxes {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px;
+        }
+        .footer {
+            text-align: center;
+            background-color: black;
+            color: white;
+            padding: 20px;
+        }
+        .social-icons img {
+            width: 30px;
+            margin: 0 10px;
+        }
+
+.texte {
+                background-image: url('images/banner2.jpg');
+    background-size: cover; /* Couvre toute la surface de l'élément */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+
+}
+
+.main{
+                background-image: url('images/banner.jpg');
+    background-size: cover; /* Couvre toute la surface de l'élément */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+
+}
+
+
+@media screen and (max-width: 1024px) {
+    .banner-text {
+        font-size: 5rem; /* Réduit la taille sur tablette */
+    }
+
+    .container, .three-boxes-section, .text-image-section, .bottom-boxes {
+        flex-direction: column; /* Passe en colonne sur petits écrans */
+        align-items: center;
+        text-align: center;
+    }
+
+    .left, .right, .text-block, .earth-image, .box {
+        width: 100%;
+    }
+
+    .box {
+        margin-bottom: 20px;
+    }
+
+    .buy-btn {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .banner-text {
+        font-size: 3rem; /* Plus petit sur mobile */
+    }
+
+    .banner img {
+        width: 80%;
+        height: auto;
+    }
+
+    .iframe-section {
+        width: 100%;
+        height: 250px;
+    }
+
+    .buy-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links, .auth-links {
+        margin-top: 10px;
+    }
+
+    .social-icons img {
+        width: 20px; /* Icônes plus petites sur mobile */
+    }
+}
+
+
+.bottom-boxes {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.box {
+    width: 45%;
+    background: #f2f2f2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 350px; /* Augmenter la hauteur pour l'image */
+    position: relative; /* Pour positionner le bouton correctement */
+}
+
+h2 {
+    text-align: left;
+    color: orange;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* Mode téléphone */
+@media screen and (max-width: 768px) {
+    .bottom-boxes {
+        flex-direction: column; /* Empiler les boîtes */
+    }
+
+    .box {
+        width: 100%; /* Pleine largeur */
+        min-height: 400px; /* Augmenter la hauteur pour bien contenir l'image */
+    }
+}
+
+.left.image-section {
+    width: 100%; /* Pleine largeur en mode mobile */
+    display: flex;
+    justify-content: center; /* Centre l'image */
+    align-items: center; /* Centre verticalement */
+    height: auto; /* Assure qu'elle s'agrandit selon l'image */
+    min-height: 300px; /* Ajuste la hauteur minimale si nécessaire */
+}
+
+/* Pour l'image à l'intérieur */
+.left.image-section img {
+    max-width: 100%; /* L'image ne dépasse pas la div */
+    height: auto; /* Garde le ratio */
+    object-fit: contain; /* Ajuste bien l'image */
+}
+
+/* Mode téléphone */
+@media screen and (max-width: 768px) {
+    .left.image-section {
+        min-height: 400px; /* Plus grand pour mieux contenir l'image */
+    }
+}
+
+/* Style pour le bouton du menu déroulant */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    color: white;
+    padding: 14px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Le contenu du menu déroulant */
+.dropdown-content {
+    display: none; /* Caché par défaut */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change la couleur quand on survole un lien */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Affiche le menu déroulant quand on survole le bouton (mode desktop) */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Affiche le menu déroulant lorsqu'on clique (mode mobile) */
+@media (max-width: 768px) {
+    .dropdown-content {
+        position: relative;
+        box-shadow: none;
+        background-color: #fff;
+    }
+    .dropdown-content a {
+        padding: 10px 15px;
+    }
+
+    /* Affiche le menu déroulant sur mobile au clic */
+    .dropdown-content {
+        display: none; /* Par défaut, il est caché */
+    }
+}
+
+
+
+    </style>
+<!-- Lien vers la bibliothèque AOS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+</head>
+<body>
+    <section class="main">
+    <header>
+        <h1>Okalamar</h1>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Grands</a>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="vins.html">Vins</a>
+                <a href="Liqueurs.html">Liqueurs</a>
+                <a href="Canettes.html">Canettes</a>
+                <a href="sans_Alcool.html">Sans-Alcool</a>
+            </div>
+        </div>
+        <a href="galerie.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="auth-links">
+            <a href="connexion.html">Login</a>
+            <a href="inscription.html">Sign In</a>
+        </div>
+        <button class="menu-btn" onclick="openSidebar()">☰</button>
+    </header>
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">×</button>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Boisson</a>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="vins.html">Vins</a>
+                <a href="Liqueurs.html">Liqueurs</a>
+                <a href="Canettes.html">Canettes</a>
+                <a href="sans_Alcool.html">Sans-Alcool</a>
+            </div>
+        </div>
+        <a href="galerie.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+        <a href="connexion.html">Login</a>
+        <a href="inscription.html">Sign In</a>
+    </div>
+        
+        <div class="banner" id="box1">
+            <h1 class="banner-text" data-aos="zoom-in">Okalamar</h1>
+        </div>
+    </section>
+<div class="container">
+    <div class="left image-section" id="box2">
+
+    </div>
+    <div class="right">
+        <h2 style="color: white; font-size: 2em;" data-aos="fade-left">Découvrez Okalamar</h2>
+        <p style="color: white; font-size: 1.2em; line-height: 1.6;" data-aos="fade-up">
+            L'orange est le fruit de deux espèces distinctes de la famille des Rutacées, d'une part l'orange douce ou simplement orange produit par l'oranger (Citrus sinensis L.), d'autre part l'orange amère produit du Bigaradier (Citrus aurantium). Comme pour tous les agrumes, il s'agit d'une forme particulière de baie appelée hespéride.
+            <br>confiture ou marmelade, ou en jus. Il existe plusieurs variétés d’oranges, classées en quatre groupes variétaux.
+        </p>
+    </div>
+</div>
+
+    
+    <div class="three-boxes-section">
+        <div class="box">
+            <img src="images/okalamar.png" alt="Boisson 1" data-aos="fade-right">
+            <button class="buy-btn" style="background-color: #FF8C00;color: white;border-radius: 50px;padding: 15px 30px;">Buy Now</button>
+        </div>
+<div class="box" id="box3" data-aos="fade-down">
+    <button class="buy-btn" style="
+        background-color: #FF8C00; 
+        color: white; 
+        border: none; 
+        padding: 15px 30px; 
+        font-size: 16px; 
+        cursor: pointer; 
+        border-radius: 50px; 
+        position: absolute; 
+        bottom: 10px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        transition: background-color 0.3s ease;
+    ">Buy Now</button>
+
+</div>
+
+        <div class="box">
+            <img src="images/okalama.png" alt="Boisson 3" data-aos="fade-left">
+            <button class="buy-btn" style="background-color: #FF8C00;color: white;border-radius: 50px;padding: 15px 30px;">Buy Now</button>
+        </div>
+    </div>
+    
+<div class="iframe-section" data-aos="fade-down">
+    <div class="overlay"></div>
+    <iframe data-aos="fade-up" src="https://www.youtube.com/embed/?enablejsapi=1&rel=0&autoplay=0&playsinline=1&expflag=embeds_enable_muted_autoplay%3Atrue&fs=1" width="80%" height="400px" frameborder="0" allowfullscreen></iframe>
+</div>
+
+    <section class="texte">
+        <div class="text-image-section">
+            <div class="text-block" data-aos="fade-down">
+                <h2 style="color: orange; text-align: center;">Fanta autour du monde</h2>
+                <p >La génomique a permis à une équipe de recherche chinoise de mettre en évidence l'existence d'oranges ancestrales très acides (Chine du sud) puis d'oranges modérément acides (Jincheng) qui donnent naissance aux oranges douces et aux oranges sans acidité [réf. souhaitée]. La diversité des oranges douces est importante dans les zones de domestication méditerranéenne et américaine (2021)11.
+
+Dans l'Antiquité, à la différence du citron et du cédrat, les oranges sont inconnues des Grecs et des Romains ; elles ne parviennent en Europe qu'au Moyen Âge, autour de l'an 100012. On peut distinguer deux grandes routes de pénétration de ce fruit en Europe. La route méditerranéenne fut empruntée, à l'époque des croisades (xie siècle-xiiie siècle), par l'orange amère ou bigarade : transmis par les Perses aux Arabes, ce fruit fut implanté en Andalousie, Sicile et Pays valencien, d'où il se diffusa vers le reste de l'Europe.
+
+</p>
+            </div>
+            <div class="earth-image" data-aos="fade-left">
+                <img src="https://assets.stickpng.com/images/580b57fbd9996e24bc43c10d.png" alt="Earth Rotating">
+            </div>
+        </div>
+        
+        <div class="bottom-boxes">
+            <div class="box" style="width: 45%;background: #f2f2f2;box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);border-radius: 8px;padding: 20px" data-aos="fade-right">
+                <h2 style="text-align: left; color: orange;">Fanta autour du monde</h2>
+            <p>la fin du xve siècle, les portugais importent une orange douce provenant de Chine et qui sera connue ailleurs comme oranger du Portugal13. La description de Citrus sinensis (citrus de Chine), l'oranger doux, est attribuée à Pehr Osbeck dans son Voyage en Chine (1771)14 mais ce sont Jonas Dryander et Joseph Banks (1797) qui nomment Citrus Aurantium ß. sinensis15. Elle est longtemps synonyme de la bigarade par exemple chez Risso (1818) 'Bigaradier chinois'16 qui nomme 'Chinois' les C. myrtifolia17. En 1765, l'Encyclopédie, article Oranger distingue «L'orange aigre ou bigarade, l'orange douce ou de Portugal {nommée orange de Chine dans ce pays], l'oranger tortu, l'orange étoilée; l'orange à écorce douce, l'oranger de la Chine»18. En 1803, Le Nouveau dictionnaire d'histoire naturelle donne l'Inde comme origine de l'oranger dont il note la confusion des 54 variétés citées19.</p>
+
+            </div>
+            <div class="box" style="width: 45%;background: #f2f2f2;box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);border-radius: 8px;padding: 20px" data-aos="fade-left">
+                <h2 style="text-align: left;color: orange;">Fanta autour du monde</h2>
+                <p>
+                On doit à Alphonse de Candolle (1883) une première synthèse sur les origines de l'orange douce, selon lui originaire de Chine et Cochinchine. Elle serait déjà cultivée en Europe dès le xive siècle (Espagne, Italie) et l'orange introduite par le Portugais depuis la Chine ne serait qu'un cultivar spécialement sucré20.
+            Jusqu'à la première moitié du xxe siècle, l'orange était un fruit de luxe, et souvent offert comme cadeau de Noël et de la Saint-Nicolas (Belgique et Pays-Bas) aux enfants21,22. Sa culture en bac a longtemps été un symbole de pouvoir pour les aristocrates qui lui dédiaient des bâtiments spécialisés : les orangeries.
+        </p>
+        </div>
+        </div>
+    <section>
+    <footer class="footer">
+        <p >We are social</p>
+        <div class="social-icons">
+            <img src="images/sociale.png" alt="Facebook">
+            <img src="images/instag.png" alt="Instagram">
+            <img src="images/social.png" alt="twitter" >
+        </div>
+    </footer>
+
+        <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const image = document.createElement("img");
+        image.src = "images/sangria.png";
+        image.id = "moving-image";
+
+        // Appliquer le style directement en JS
+        image.style.width = "330px"; // Ajuste selon la taille désirée
+        image.style.height = "auto"; // Pour garder les proportions
+        image.style.position = "absolute";
+        image.style.transition = "all 0.8s ease-in-out";
+        document.body.appendChild(image);
+
+        // Liste des IDs des sections où l'image doit se déplacer
+        const boxIds = ["box1", "box2", "box3"];
+        const boxes = boxIds.map(id => document.getElementById(id));
+
+        function moveImage(targetBox) {
+            if (targetBox) {
+                const boxRect = targetBox.getBoundingClientRect();
+                image.style.left = `${boxRect.left + window.scrollX + (boxRect.width / 2) - (image.width / 2)}px`;
+                image.style.top = `${boxRect.top + window.scrollY + (boxRect.height / 2) - (image.height / 2)}px`;
+            }
+        }
+
+        function updateImagePosition(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    moveImage(entry.target);
+                }
+            });
+        }
+
+        const observer = new IntersectionObserver(updateImagePosition, {
+            root: null,
+            threshold: 0.5
+        });
+
+        boxes.forEach(box => observer.observe(box));
+
+        // Position initiale de l'image
+        moveImage(boxes[0]);
+    });
+
+
+       function openSidebar() {
+            document.getElementById("sidebar").style.left = "0";
+        }
+        function closeSidebar() {
+            document.getElementById("sidebar").style.left = "-250px";
+        }
+        window.addEventListener("scroll", function() {
+            closeSidebar();
+        });
+            function toggleDropdown() {
+        const dropdownContent = document.getElementById("dropdown-content");
+        dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+    }
+    </script>
+<!-- Script pour activer AOS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000, // Durée de l'animation
+        easing: 'ease-in-out', // Effet de transition fluide
+        once: true // Animer une seule fois au défilement
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Responsive</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: white;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #222;
+        }
+        .nav-links, .auth-links {
+            display: flex;
+        }
+        .nav-links a, .auth-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+            position: relative;
+        }
+        .nav-links a:last-child, .auth-links a:last-child {
+            margin-right: 0;
+        }
+        .nav-links a::after, .auth-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .auth-links a:hover::after {
+            width: 100%;
+        }
+        .menu-btn {
+            display: none;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #222;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            transition: left 0.3s ease;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            text-align: center;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #444;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .nav-links, .auth-links {
+                display: none;
+            }
+            .menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fanta</h1>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="galerie.html">Grands</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="auth-links">
+            <a href="connexion.html">Login</a>
+            <a href="inscription.html">Sign In</a>
+        </div>
+        <button class="menu-btn" onclick="openSidebar()">☰</button>
+    </header>
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">×</button>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="galerie.html">Grands</a>
+        <a href="contact.html">Contact</a>
+        <a href="connexion.html">Login</a>
+        <a href="inscription.html">Sign In</a>
+    </div>
+    <script>
+        function openSidebar() {
+            document.getElementById("sidebar").style.left = "0";
+        }
+        function closeSidebar() {
+            document.getElementById("sidebar").style.left = "-250px";
+        }
+    </script>
+</body>
+</html>

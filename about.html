@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('images/banner.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .about-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .about-info div {
+            flex: 1;
+            margin: 10px;
+        }
+        .about-info img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .about-info img:hover {
+            transform: scale(1.05);
+        }
+        .text-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .text-content h3 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        .text-content p {
+            line-height: 1.6;
+        }
+            header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        .nav-links, .auth-links {
+            display: flex;
+        }
+        .nav-links a, .auth-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+            position: relative;
+        }
+        .nav-links a:last-child, .auth-links a:last-child {
+            margin-right: 0;
+        }
+        .nav-links a::after, .auth-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .auth-links a:hover::after {
+            width: 100%;
+        }
+        .menu-btn {
+            display: none;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #222;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            transition: left 0.3s ease;
+            z-index: 9999;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            text-align: center;
+            display: block;
+                        position: relative; /* Évite tout chevauchement d'éléments */
+            z-index: 10000; /* Assure que les liens sont bien cliquables */
+        }
+        .sidebar a:hover {
+            background-color: #444;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .nav-links, .auth-links {
+                display: none;
+            }
+            .menu-btn {
+                display: block;
+            }
+        }
+
+
+        /* Style pour le bouton du menu déroulant */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+
+    color: white;
+    padding: 14px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Le contenu du menu déroulant */
+.dropdown-content {
+    display: none; /* Caché par défaut */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change la couleur quand on survole un lien */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Affiche le menu déroulant quand on survole le bouton (mode desktop) */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Affiche le menu déroulant lorsqu'on clique (mode mobile) */
+@media (max-width: 768px) {
+    .dropdown-content {
+        position: relative;
+        box-shadow: none;
+        background-color: #fff;
+    }
+    .dropdown-content a {
+        padding: 10px 15px;
+    }
+
+    /* Affiche le menu déroulant sur mobile au clic */
+    .dropdown-content {
+        display: none; /* Par défaut, il est caché */
+    }
+}
+ .footer {
+            text-align: center;
+            background-color: black;
+            color: white;
+            padding: 20px;
+        }
+        .social-icons img {
+            width: 30px;
+            margin: 0 10px;
+        }
+
+    </style>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Okalamar</h1>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Grands</a>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="vins.html">Vins</a>
+                <a href="Liqueurs.html">Liqueurs</a>
+                <a href="Canettes.html">Canettes</a>
+                <a href="sans_Alcool.html">Sans-Alcool</a>
+            </div>
+        </div>
+        <a href="galerie.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="auth-links">
+            <a href="connexion.html">Login</a>
+            <a href="inscription.html">Sign In</a>
+        </div>
+        <button class="menu-btn" onclick="openSidebar()">☰</button>
+    </header>
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">×</button>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Boisson</a>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="vins.html">Vins</a>
+                <a href="Liqueurs.html">Liqueurs</a>
+                <a href="Canettes.html">Canettes</a>
+                <a href="sans_Alcool.html">Sans-Alcool</a>
+            </div>
+        </div>
+        <a href="galerie.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+        <a href="connexion.html">Login</a>
+        <a href="inscription.html">Sign In</a>
+    </div>
+    <script>
+        function openSidebar() {
+            document.getElementById("sidebar").style.left = "0";
+        }
+        function closeSidebar() {
+            document.getElementById("sidebar").style.left = "-250px";
+        }
+        window.addEventListener("scroll", function() {
+            closeSidebar();
+        });
+
+            function toggleDropdown() {
+        const dropdownContent = document.getElementById("dropdown-content");
+        dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+    }
+    </script>
+    <div class="container">
+        <h2 data-aos="fade-left">À propos de nous</h2>
+        <div class="about-info">
+            <div data-aos="fade-up">
+                <img src="images/sangria.png" alt="Image À propos">
+            </div>
+            <div class="text-content">
+                <h3 data-aos="fade-left">Notre Mission</h3>
+                <p data-aos="fade-right">
+                    Nous sommes une entreprise dédiée à fournir les meilleurs services dans le domaine de l'innovation. 
+                    Notre équipe passionnée travaille sans relâche pour offrir des solutions créatives et durables, tout en plaçant l'expérience client au cœur de nos priorités.
+                </p>
+                <h3 data-aos="fade-up">Notre Vision</h3>
+                <p data-aos="fade-down">
+                    Nous visons à transformer les défis d'aujourd'hui en opportunités pour demain. Notre objectif est de devenir un leader de l'innovation, tout en créant un impact positif dans la société et l'économie.
+                </p>
+                <h3 data-aos="fade-right">Nos Valeurs</h3>
+                <p data-aos="fade-left">
+                    - Innovation<br>
+                    - Engagement<br>
+                    - Excellence<br>
+                    - Responsabilité sociale<br>
+                    Ces valeurs sont au cœur de tout ce que nous faisons et guident nos décisions au quotidien.
+                </p>
+            </div>
+        </div>
+    </div>
+        <footer class="footer">
+        <p >We are social</p>
+        <div class="social-icons">
+            <img src="images/sociale.png" alt="Facebook">
+            <img src="images/instag.png" alt="Instagram">
+            <img src="images/social.png" alt="twitter" >
+        </div>
+    </footer>
+    <!-- Script pour activer AOS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000, // Durée de l'animation
+        easing: 'ease-in-out', // Effet de transition fluide
+        once: true // Animer une seule fois au défilement
+    });
+</script>
+</body>
+</html>

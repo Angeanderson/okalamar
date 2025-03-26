@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Innovant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+            header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+                            background-image: url('images/banner.jpg');
+    background-size: cover; /* Couvre toute la surface de l'élément */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+
+        }
+        .nav-links, .auth-links {
+            display: flex;
+        }
+        .nav-links a, .auth-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+            position: relative;
+        }
+        .nav-links a:last-child, .auth-links a:last-child {
+            margin-right: 0;
+        }
+        .nav-links a::after, .auth-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .auth-links a:hover::after {
+            width: 100%;
+        }
+        .menu-btn {
+            display: none;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #222;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            transition: left 0.3s ease;
+            z-index: 9999;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            text-align: center;
+            display: block;
+                        position: relative; /* Évite tout chevauchement d'éléments */
+            z-index: 10000; /* Assure que les liens sont bien cliquables */
+        }
+        .sidebar a:hover {
+            background-color: #444;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .nav-links, .auth-links {
+                display: none;
+            }
+            .menu-btn {
+                display: block;
+            }
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background-image: url('images/banner2.jpg');
+            background-size: cover; /* Couvre toute la surface de l'élément */
+            background-position: center; /* Centre l'image */
+            background-repeat: no-repeat; /* Empêche la répétition de l'image */
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .caption {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: orange;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+        }
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .lightbox img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+                .footer {
+            text-align: center;
+            background-color: black;
+            color: white;
+            padding: 20px;
+        }
+        .social-icons img {
+            width: 30px;
+            margin: 0 10px;
+        }
+
+        /* Style pour le bouton du menu déroulant */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    color: white;
+    padding: 14px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Le contenu du menu déroulant */
+.dropdown-content {
+    display: none; /* Caché par défaut */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change la couleur quand on survole un lien */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Affiche le menu déroulant quand on survole le bouton (mode desktop) */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Affiche le menu déroulant lorsqu'on clique (mode mobile) */
+@media (max-width: 768px) {
+    .dropdown-content {
+        position: relative;
+        box-shadow: none;
+        background-color: #fff;
+    }
+    .dropdown-content a {
+        padding: 10px 15px;
+    }
+
+    /* Affiche le menu déroulant sur mobile au clic */
+    .dropdown-content {
+        display: none; /* Par défaut, il est caché */
+    }
+}
+
+
+ .footer {
+            text-align: center;
+            background-color: black;
+            color: white;
+            padding: 20px;
+        }
+        .social-icons img {
+            width: 30px;
+            margin: 0 10px;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Okalamar</h1>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Boisson</a>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="vins.html">Vins</a>
+                <a href="Liqueurs.html">Liqueurs</a>
+                <a href="Canettes.html">Canettes</a>
+                <a href="sans_Alcool.html">Sans-Alcool</a>
+            </div>
+        </div>
+        <a href="galerie.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="auth-links">
+            <a href="connexion.html">Login</a>
+            <a href="inscription.html">Sign In</a>
+        </div>
+        <button class="menu-btn" onclick="openSidebar()">☰</button>
+    </header>
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">×</button>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Boisson</a>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="vins.html">Vins</a>
+                <a href="Liqueurs.html">Liqueurs</a>
+                <a href="Canettes.html">Canettes</a>
+                <a href="sans_Alcool.html">Sans-Alcool</a>
+            </div>
+        </div>
+        <a href="galerie.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+        <a href="connexion.html">Login</a>
+        <a href="inscription.html">Sign In</a>
+    </div>
+    <script>
+        function openSidebar() {
+            document.getElementById("sidebar").style.left = "0";
+        }
+        function closeSidebar() {
+            document.getElementById("sidebar").style.left = "-250px";
+        }
+        window.addEventListener("scroll", function() {
+            closeSidebar();
+        });
+
+            function toggleDropdown() {
+        const dropdownContent = document.getElementById("dropdown-content");
+        dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+    }
+    </script>
+    
+    <div class="gallery">
+        <div class="gallery-item" data-aos="fade-down" onclick="openLightbox('images/okalamar.png', 'Magnifique paysage naturel')">
+            <img src="images/okalamar.png" alt="Nature">
+            <div class="caption">Nature</div>
+        </div>
+        <div class="gallery-item" data-aos="fade-up" onclick="openLightbox('images/vin1.png', 'Ville moderne et dynamique')">
+            <img src="images/vin1.png" alt="Ville">
+            <div class="caption">Ville</div>
+        </div>
+        <div class="gallery-item". data-aos="fade-left" onclick="openLightbox('images/liqueur1.png', 'Technologie de pointe')">
+            <img src="images/liqueur1.png" alt="Technologie">
+            <div class="caption">Technologie</div>
+        </div>
+        <div class="gallery-item" data-aos="fade-right" onclick="openLightbox('images/okalamar.png', 'Océan tranquille')">
+            <img src="images/okalamar.png" alt="Océan">
+            <div class="caption">Océan</div>
+        </div>
+        <div class="gallery-item" data-aos="fade-up" onclick="openLightbox('images/biere1.png', 'Montagne enneigée')">
+            <img src="images/biere1.png" alt="Montagne">
+            <div class="caption">Montagne</div>
+        </div>
+        <div class="gallery-item" data-aos="fade-right" onclick="openLightbox('images/liqueur3.png', 'Forêt mystérieuse')">
+            <img src="images/liqueur3.png" alt="Forêt">
+            <div class="caption">Forêt</div>
+        </div>
+        <div class="gallery-item" data-aos="fade-down" onclick="openLightbox('images/okalamar.png', 'Coucher de soleil')">
+            <img src="images/okalamar.png" alt="Coucher de soleil">
+            <div class="caption">Coucher de soleil</div>
+        </div>
+        <div class="gallery-item" data-aos="fade-left"  onclick="openLightbox('images/okalama.png', 'Art urbain')">
+            <img src="images/okalama.png" alt="Art urbain">
+            <div class="caption">Art urbain</div>
+        </div>
+        <div class="gallery-item" data-aos="fade-up"o onclick="openLightbox('images/okalamar.png', 'Cascade majestueuse')">
+            <img src="images/okalamar.png" alt="Cascade">
+            <div class="caption">Cascade</div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+        <div class="description" id="lightbox-desc"></div>
+    </div>
+        <footer class="footer">
+        <p >We are social</p>
+        <div class="social-icons">
+            <img src="images/sociale.png" alt="Facebook">
+            <img src="images/instag.png" alt="Instagram">
+            <img src="images/social.png" alt="twitter" >
+        </div>
+    </footer>
+    <script>
+        function openLightbox(imageSrc, description) {
+            document.getElementById('lightbox-img').src = imageSrc;
+            document.getElementById('lightbox-desc').innerText = description;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+    </script>
+    <!-- Script pour activer AOS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000, // Durée de l'animation
+        easing: 'ease-in-out', // Effet de transition fluide
+        once: true // Animer une seule fois au défilement
+    });
+</script>
+</body>
+</html>
